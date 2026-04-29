@@ -17,55 +17,377 @@
   --surface:#fff; --line:rgba(10,20,15,.08);
   --bg:#f5f6f4; --shadow:0 10px 24px rgba(10,20,15,.05);
 }
+
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-.wrap{max-width:1280px;margin:0 auto;padding:22px 18px 40px}
-.hero{background:linear-gradient(135deg,#01534f 0%,#0c655e 60%,#185FA5 100%);color:#fff;border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-bottom:18px}
-.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.brand img{height:34px;width:auto;display:block;filter:brightness(0) invert(1)}
-.brand h1{margin:0;font-size:22px;line-height:1.1}
-.brand p{margin:5px 0 0;font-size:13px;color:rgba(255,255,255,.82)}
-.actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.pill-live{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);font-size:12px}
-.dot{width:8px;height:8px;border-radius:50%;background:#74ffc1}
-.btn{border:none;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;background:#fff;color:var(--green)}
-.config{margin-top:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;font-size:12px;color:rgba(255,255,255,.88)}
-.config code{background:rgba(255,255,255,.16);border-radius:6px;padding:2px 6px;color:#fff}
-.bar{display:none;margin-bottom:14px;padding:12px 14px;border-radius:14px;border:1px solid;font-size:13px}
-.loading{display:flex;align-items:center;gap:10px;background:var(--green-soft);color:var(--green);border-color:rgba(1,83,79,.12)}
-.error{background:var(--red-soft);color:var(--red);border-color:rgba(163,45,45,.18)}
-.empty{background:var(--amber-soft);color:#8d5a10;border-color:rgba(185,116,24,.18)}
-.spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(1,83,79,.18);border-top-color:var(--green);animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.filters{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);margin-bottom:16px}
-.filters-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:800;margin-bottom:10px}
-.filters-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:10px;align-items:end}
-.field label{display:block;margin-bottom:6px;font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.04em}
-.field input,.field select{width:100%;height:42px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:0 12px;font-size:13px;color:var(--ink);outline:none}
-.btn-secondary{background:#edf2ee;color:var(--muted);border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-weight:700;cursor:pointer}
-.summary{margin-top:10px;font-size:12px;color:var(--faint)}
-.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px}
-.kpi{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
-.kpi-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
-.kpi-label{font-size:11px;text-transform:uppercase;color:var(--muted);font-weight:700;letter-spacing:.05em}
-.kpi-icon{width:28px;height:28px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px}
-.kpi-value{font-size:30px;line-height:1;font-weight:800;margin-bottom:6px}
-.kpi-sub{font-size:12px;color:var(--faint);min-height:18px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
-.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.card h3{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
-.card-note{font-size:11px;color:var(--faint)}
-.chart-wrap{position:relative;width:100%}
-.insight-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px}
-.insight{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
-.insight-label{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
-.insight-value{font-size:26px;font-weight:800}
-.insight-sub{font-size:12px;color:var(--faint);margin-top:4px}
-@media(max-width:1180px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.filters-grid{grid-template-columns:1fr 1fr}.insight-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:780px){.wrap{padding:18px 12px 34px}.brand h1{font-size:19px}.brand img{height:28px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-2{grid-template-columns:1fr}.filters-grid{grid-template-columns:1fr}}
-@media(max-width:520px){.kpis,.insight-grid{grid-template-columns:1fr}}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+}
+
+.wrap{
+  max-width:1280px;
+  margin:0 auto;
+  padding:22px 18px 40px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#01534f 0%,#0c655e 60%,#185FA5 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+}
+
+.hero-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.brand img{
+  height:34px;
+  width:auto;
+  display:block;
+  filter:brightness(0) invert(1);
+}
+
+.brand h1{
+  margin:0;
+  font-size:22px;
+  line-height:1.1;
+}
+
+.brand p{
+  margin:5px 0 0;
+  font-size:13px;
+  color:rgba(255,255,255,.82);
+}
+
+.actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.pill-live{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:12px;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#74ffc1;
+}
+
+.btn{
+  border:none;
+  border-radius:999px;
+  padding:10px 16px;
+  font-weight:700;
+  cursor:pointer;
+  background:#fff;
+  color:var(--green);
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.config{
+  margin-top:14px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:12px 14px;
+  font-size:12px;
+  color:rgba(255,255,255,.88);
+}
+
+.config code{
+  background:rgba(255,255,255,.16);
+  border-radius:6px;
+  padding:2px 6px;
+  color:#fff;
+}
+
+.bar{
+  display:none;
+  margin-bottom:14px;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid;
+  font-size:13px;
+}
+
+.loading{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--green-soft);
+  color:var(--green);
+  border-color:rgba(1,83,79,.12);
+}
+
+.error{
+  background:var(--red-soft);
+  color:var(--red);
+  border-color:rgba(163,45,45,.18);
+}
+
+.empty{
+  background:var(--amber-soft);
+  color:#8d5a10;
+  border-color:rgba(185,116,24,.18);
+}
+
+.spinner{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  border:2px solid rgba(1,83,79,.18);
+  border-top-color:var(--green);
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.filters{
+  background:rgba(255,255,255,.88);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
+}
+
+.filters-title{
+  font-size:12px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.filters-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr auto;
+  gap:10px;
+  align-items:end;
+}
+
+.field label{
+  display:block;
+  margin-bottom:6px;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  color:var(--muted);
+  letter-spacing:.04em;
+}
+
+.field input,
+.field select{
+  width:100%;
+  height:42px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  padding:0 12px;
+  font-size:13px;
+  color:var(--ink);
+  outline:none;
+}
+
+.btn-secondary{
+  background:#edf2ee;
+  color:var(--muted);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:11px 14px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.summary{
+  margin-top:10px;
+  font-size:12px;
+  color:var(--faint);
+}
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.kpi{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+
+.kpi-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.kpi-label{
+  font-size:11px;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:700;
+  letter-spacing:.05em;
+}
+
+.kpi-icon{
+  width:28px;
+  height:28px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+}
+
+.kpi-value{
+  font-size:30px;
+  line-height:1;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.kpi-sub{
+  font-size:12px;
+  color:var(--faint);
+  min-height:18px;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.card-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+
+.card h3{
+  margin:0;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--muted);
+}
+
+.card-note{
+  font-size:11px;
+  color:var(--faint);
+}
+
+.chart-wrap{
+  position:relative;
+  width:100%;
+}
+
+.insight-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.insight{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+
+.insight-label{
+  font-size:11px;
+  color:var(--muted);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  margin-bottom:8px;
+}
+
+.insight-value{
+  font-size:26px;
+  font-weight:800;
+}
+
+.insight-sub{
+  font-size:12px;
+  color:var(--faint);
+  margin-top:4px;
+}
+
+@media(max-width:1180px){
+  .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .filters-grid{grid-template-columns:1fr 1fr}
+  .insight-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:780px){
+  .wrap{padding:18px 12px 34px}
+  .brand h1{font-size:19px}
+  .brand img{height:28px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-2{grid-template-columns:1fr}
+  .filters-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:520px){
+  .kpis,.insight-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
@@ -111,7 +433,7 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(
   <div class="filters-grid">
     <div class="field">
       <label for="search-input">Buscar</label>
-      <input id="search-input" type="text" placeholder="Ciudad, contacto, email, notas o resultado">
+      <input id="search-input" type="text" placeholder="Ciudad, contacto, email, notas, estado o resultado">
     </div>
 
     <div class="field">
@@ -130,6 +452,7 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(
 
     <button class="btn-secondary" id="clear-filters-btn" type="button">Limpiar</button>
   </div>
+
   <div class="summary" id="filter-summary">Sin filtros activos.</div>
 </section>
 
@@ -186,7 +509,7 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(
 <section id="empty-state" class="card" style="display:none;text-align:center;">
   <div style="font-size:32px;margin-bottom:10px;">📭</div>
   <h3 style="margin:0 0 8px;">No hay datos suficientes</h3>
-  <p style="margin:0;color:var(--muted);">Revisa que la hoja tenga registros válidos.</p>
+  <p style="margin:0;color:var(--muted);">Revisa que la hoja tenga registros válidos o que los filtros no estén dejando el dashboard vacío.</p>
 </section>
 
 </div>
@@ -272,31 +595,35 @@ function parseNumber(value) {
   return clean ? Number(clean) : 0;
 }
 
-function pick(obj, keys) {
-  for (const key of keys) {
-    if (obj[key] && String(obj[key]).trim()) return String(obj[key]).trim();
-  }
-  return '';
+function includesAny(text, words) {
+  const t = normalizeText(text);
+  return words.some(w => t.includes(normalizeText(w)));
 }
 
 function isSpain(country) {
   const c = normalizeText(country);
+  if (!c) return true;
   return c === 'spain' || c === 'espana' || c === 'españa';
 }
 
 function getCCAA(city) {
   if (!city) return 'Otras';
-  return CCAA_MAP[String(city).trim()] || 'Otras';
+  const cleanCity = String(city).trim();
+  return CCAA_MAP[cleanCity] || CCAA_MAP[cleanCity.charAt(0).toUpperCase() + cleanCity.slice(1).toLowerCase()] || 'Otras';
 }
 
 function normalizeEstado(value = '') {
   const e = normalizeText(value);
-  if (e.includes('cerrado')) return 'cerrado';
+
+  if (!e) return 'pendiente';
+  if (e.includes('cerrado') || e.includes('ganado') || e.includes('contratado')) return 'cerrado';
   if (e.includes('oportun')) return 'oportunidad';
-  if (e.includes('reuni')) return 'reunion';
-  if (e.includes('respond')) return 'respondido';
-  if (e.includes('enviado')) return 'enviado';
-  if (e.includes('pendiente')) return 'pendiente';
+  if (e.includes('reuni') || e.includes('meeting') || e.includes('cita')) return 'reunion';
+  if (e.includes('respond') || e.includes('respuesta') || e.includes('contesta') || e.includes('contesto')) return 'respondido';
+  if (e.includes('enviado') || e.includes('mandado') || e.includes('email enviado') || e.includes('mail enviado')) return 'enviado';
+  if (e.includes('pendiente') || e.includes('por enviar') || e.includes('sin enviar')) return 'pendiente';
+  if (e.includes('error') || e.includes('rebote') || e.includes('no valido') || e.includes('no válido')) return 'email_no_valido';
+
   return 'otro';
 }
 
@@ -308,6 +635,7 @@ function estadoLabel(v = '') {
     case 'reunion': return 'Reunión';
     case 'oportunidad': return 'Oportunidad';
     case 'cerrado': return 'Cerrado';
+    case 'email_no_valido': return 'Email no válido';
     default: return 'Otro';
   }
 }
@@ -316,42 +644,117 @@ function normalizeResultado(value = '') {
   const r = normalizeText(value);
 
   if (!r) return 'sin_resultado';
-  if (r.includes('respond')) return 'respondido';
-  if (r.includes('reuni')) return 'reunion';
-  if (r.includes('llam')) return 'llamada';
-  if (r.includes('cerrado')) return 'cerrado';
-  if (r.includes('error') || r.includes('no existe') || r.includes('rebote')) return 'email_no_valido';
-  if (r.includes('solicitud')) return 'solicitud';
-  if (r.includes('pendiente')) return 'pendiente';
 
-  return r.replace(/\s+/g,'_').slice(0,30);
+  if (
+    r.includes('llamada') ||
+    r.includes('llamado') ||
+    r.includes('llamar') ||
+    r.includes('call')
+  ) return 'llamada';
+
+  if (
+    r.includes('reunion realizada') ||
+    r.includes('reunión realizada') ||
+    r.includes('reunion_realizada') ||
+    r.includes('reunión_realizada')
+  ) return 'reunion_realizada';
+
+  if (
+    r.includes('solicitud de reunion') ||
+    r.includes('solicitud de reunión') ||
+    r.includes('solicitud dereunion') ||
+    r.includes('solicitud dereunión') ||
+    r.includes('solicitud reunion') ||
+    r.includes('solicitud reunión')
+  ) return 'solicitud_reunion';
+
+  if (
+    r.includes('contacto cerrado') ||
+    r.includes('contacto_cerrado') ||
+    r.includes('cerrado')
+  ) return 'contacto_cerrado';
+
+  if (
+    r.includes('error en email/contacto') ||
+    r.includes('error email') ||
+    r.includes('error en email') ||
+    r.includes('error contacto') ||
+    r.includes('rebote') ||
+    r.includes('devuelto') ||
+    r.includes('no existe el email') ||
+    r.includes('no existe email') ||
+    r.includes('email no valido') ||
+    r.includes('email no válido') ||
+    r.includes('correo no valido') ||
+    r.includes('correo no válido') ||
+    r.includes('incorrecto')
+  ) return 'error_email_contacto';
+
+  if (
+    r.includes('respondido') ||
+    r.includes('respondida') ||
+    r.includes('respuesta') ||
+    r.includes('contesta') ||
+    r.includes('contesto') ||
+    r.includes('contestó')
+  ) return 'respondido';
+
+  return r
+    .replace(/[^\w\s]/g, ' ')
+    .replace(/\s+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .slice(0, 45);
 }
 
 function resultadoLabel(v = '') {
   switch(v){
     case 'sin_resultado': return 'Sin resultado';
-    case 'respondido': return 'Respondido';
-    case 'reunion': return 'Reunión';
     case 'llamada': return 'Llamada';
-    case 'cerrado': return 'Cerrado';
-    case 'email_no_valido': return 'Email no válido';
-    case 'solicitud': return 'Solicitud';
-    case 'pendiente': return 'Pendiente';
-    default: return String(v).replace(/_/g,' ');
+    case 'reunion_realizada': return 'Reunión realizada';
+    case 'solicitud_reunion': return 'Solicitud de reunión';
+    case 'contacto_cerrado': return 'Contacto cerrado';
+    case 'error_email_contacto': return 'Error en email/contacto';
+    case 'respondido': return 'Respondido';
+    default:
+      return String(v)
+        .replace(/_/g, ' ')
+        .replace(/\b\w/g, l => l.toUpperCase());
   }
 }
 
-function isActivo(estado = '') {
-  const n = normalizeEstado(estado);
-  return ['enviado','respondido','reunion','oportunidad','cerrado'].includes(n);
-}
-
 function isRespondido(row) {
-  return row.estadoNorm === 'respondido' || row.resultadoNorm === 'respondido';
+  return row.estadoNorm === 'respondido' ||
+         row.resultadoNorm === 'respondido' ||
+         row.resultadoNorm === 'llamada' ||
+         row.resultadoNorm === 'reunion_realizada' ||
+         row.resultadoNorm === 'solicitud_reunion';
 }
 
 function isReunion(row) {
-  return row.estadoNorm === 'reunion' || row.resultadoNorm === 'reunion';
+  return row.estadoNorm === 'reunion' ||
+         row.resultadoNorm === 'reunion_realizada' ||
+         row.resultadoNorm === 'solicitud_reunion';
+}
+
+function isEmailNoValido(row) {
+  return row.estadoNorm === 'email_no_valido' ||
+         row.resultadoNorm === 'error_email_contacto';
+}
+
+function isCerrado(row) {
+  return row.estadoNorm === 'cerrado' ||
+         row.resultadoNorm === 'contacto_cerrado';
+}
+
+function isActivo(row) {
+  return ['enviado','respondido','reunion','oportunidad','cerrado'].includes(row.estadoNorm) ||
+         [
+          'llamada',
+          'reunion_realizada',
+          'solicitud_reunion',
+          'contacto_cerrado',
+          'respondido'
+         ].includes(row.resultadoNorm);
 }
 
 function parseCSV(text) {
@@ -420,13 +823,34 @@ function showEmptyState(show) {
   document.getElementById('filters-wrap').style.display = show ? 'none' : 'block';
 }
 
+function findValue(obj, patterns) {
+  const entries = Object.entries(obj);
+
+  for (const [key, value] of entries) {
+    const k = normalizeHeader(key);
+    if (patterns.some(p => k === normalizeHeader(p))) {
+      if (String(value || '').trim()) return String(value || '').trim();
+    }
+  }
+
+  for (const [key, value] of entries) {
+    const k = normalizeHeader(key);
+    if (patterns.some(p => k.includes(normalizeHeader(p)))) {
+      if (String(value || '').trim()) return String(value || '').trim();
+    }
+  }
+
+  return '';
+}
+
 function normalizeRows(rows) {
   return rows.map(row => {
+    const resultadoCombined = `${row.resultado || ''} ${row.respuesta || ''} ${row.seguimiento || ''}`;
     const estadoNorm = normalizeEstado(row.estado || '');
-    const resultadoNorm = normalizeResultado(row.resultado || '');
+    const resultadoNorm = normalizeResultado(resultadoCombined);
 
-    return {
-      pais: String(row.pais || '').trim(),
+    const base = {
+      pais: String(row.pais || '').trim() || 'España',
       ciudad: String(row.ciudad || '').trim(),
       poblacion: parseNumber(row.poblacion),
       contacto: String(row.contacto || '').trim(),
@@ -436,12 +860,16 @@ function normalizeRows(rows) {
       estadoNorm,
       fecha: String(row.fecha || '').trim(),
       resultado: String(row.resultado || '').trim(),
+      respuesta: String(row.respuesta || '').trim(),
+      seguimiento: String(row.seguimiento || '').trim(),
       resultadoNorm,
       notas: String(row.notas || '').trim(),
       proximo: String(row.proximo || '').trim(),
-      ccaa: getCCAA(row.ciudad || ''),
-      activo: isActivo(row.estado || '')
+      ccaa: getCCAA(row.ciudad || '')
     };
+
+    base.activo = isActivo(base);
+    return base;
   });
 }
 
@@ -450,7 +878,7 @@ function populateFilters(rows) {
   const ccaaSelect = document.getElementById('ccaa-filter');
 
   const estados = [...new Set(rows.map(r => r.estadoNorm).filter(Boolean))]
-    .sort((a,b) => a.localeCompare(b,'es'));
+    .sort((a,b) => estadoLabel(a).localeCompare(estadoLabel(b),'es'));
 
   const ccaas = [...new Set(rows.filter(r => isSpain(r.pais)).map(r => r.ccaa).filter(Boolean))]
     .sort((a,b) => a.localeCompare(b,'es'));
@@ -470,8 +898,21 @@ function getFilteredRows() {
   return normalizedRows.filter(row => {
     const matchEstado = estado === 'all' || row.estadoNorm === estado;
     const matchCCAA = ccaa === 'all' || row.ccaa === ccaa;
-    const matchSearch = !search || [row.ciudad, row.contacto, row.email, row.notas, row.proximo, row.resultado]
-      .some(v => normalizeText(v).includes(search));
+
+    const matchSearch = !search || [
+      row.pais,
+      row.ciudad,
+      row.contacto,
+      row.email,
+      row.telefono,
+      row.estado,
+      row.resultado,
+      row.respuesta,
+      row.seguimiento,
+      row.notas,
+      row.proximo
+    ].some(v => normalizeText(v).includes(search));
+
     return matchEstado && matchCCAA && matchSearch;
   });
 }
@@ -495,8 +936,8 @@ function renderKPIs(data) {
   const items = [
     {label:'Total España', value:data.totalSpain, sub:'contactos en CRM', color:'var(--ink)', icon:'🇪🇸', bg:'#f2f4ef'},
     {label:'Enviados', value:data.enviados, sub:'contactos activados', color:'var(--green)', icon:'✉️', bg:'var(--green-soft)'},
-    {label:'Respondidos', value:data.respondidos, sub:'Estado o resultado email', color:'var(--blue)', icon:'💬', bg:'var(--blue-soft)'},
-    {label:'Reuniones', value:data.reuniones, sub:'contactos cualificados', color:'var(--purple)', icon:'📅', bg:'var(--purple-soft)'},
+    {label:'Respondidos', value:data.respondidos, sub:'llamada, reunión o solicitud', color:'var(--blue)', icon:'💬', bg:'var(--blue-soft)'},
+    {label:'Reuniones', value:data.reuniones, sub:'realizadas o solicitadas', color:'var(--purple)', icon:'📅', bg:'var(--purple-soft)'},
     {label:'Emails no válidos', value:data.emailNoValido, sub:'incidencias detectadas', color:'var(--red)', icon:'⚠️', bg:'var(--red-soft)'},
     {label:'Pendientes', value:data.pendientes, sub:'por activar', color:'var(--amber)', icon:'⏳', bg:'var(--amber-soft)'}
   ];
@@ -518,7 +959,7 @@ function renderInsights(data) {
     <div class="insight">
       <div class="insight-label">Tasa de respuesta</div>
       <div class="insight-value">${data.totalSpain ? Math.round(data.respondidos / data.totalSpain * 100) : 0}%</div>
-      <div class="insight-sub">respondidos sobre contactos España</div>
+      <div class="insight-sub">respuestas sobre contactos España</div>
     </div>
     <div class="insight">
       <div class="insight-label">Tasa de reunión</div>
@@ -544,32 +985,88 @@ function renderEstadosChart(data) {
 
   charts.estados = new Chart(document.getElementById('chart-estados'), {
     type:'bar',
-    data:{labels,datasets:[{data:values,backgroundColor:['#b97418','#01534f','#185FA5','#534AB7','#d5962b','#0b6a58'],borderRadius:8}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{precision:0}}}}
+    data:{
+      labels,
+      datasets:[{
+        data:values,
+        backgroundColor:['#b97418','#01534f','#185FA5','#534AB7','#d5962b','#0b6a58'],
+        borderRadius:8
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{display:false}},
+        y:{beginAtZero:true,ticks:{precision:0}}
+      }
+    }
   });
 }
 
 function renderResultadosChart(rows) {
   const map = {};
+
   rows.filter(r => isSpain(r.pais)).forEach(r => {
     const key = r.resultadoNorm || 'sin_resultado';
     map[key] = (map[key] || 0) + 1;
   });
 
-  const arr = Object.entries(map).sort((a,b) => b[1]-a[1]);
+  const order = [
+    'llamada',
+    'reunion_realizada',
+    'solicitud_reunion',
+    'contacto_cerrado',
+    'error_email_contacto',
+    'respondido',
+    'sin_resultado'
+  ];
+
+  const arr = Object.entries(map).sort((a,b) => {
+    const ai = order.indexOf(a[0]);
+    const bi = order.indexOf(b[0]);
+
+    if (ai !== -1 && bi !== -1) return ai - bi;
+    if (ai !== -1) return -1;
+    if (bi !== -1) return 1;
+
+    return b[1] - a[1];
+  });
 
   charts.resultados = new Chart(document.getElementById('chart-resultados'), {
     type:'bar',
     data:{
       labels: arr.map(x => resultadoLabel(x[0])),
-      datasets:[{data:arr.map(x => x[1]),backgroundColor:'#185FA5',borderRadius:8}]
+      datasets:[{
+        data: arr.map(x => x[1]),
+        backgroundColor:'#185FA5',
+        borderRadius:8
+      }]
     },
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{precision:0}},y:{grid:{display:false}}}}
+    options:{
+      indexAxis:'y',
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false}
+      },
+      scales:{
+        x:{
+          beginAtZero:true,
+          ticks:{precision:0}
+        },
+        y:{
+          grid:{display:false}
+        }
+      }
+    }
   });
 }
 
 function renderCcaaChart(spainRows) {
   const map = {};
+
   spainRows.forEach(r => {
     const key = r.ccaa || 'Otras';
     map[key] = (map[key] || 0) + 1;
@@ -579,8 +1076,24 @@ function renderCcaaChart(spainRows) {
 
   charts.ccaa = new Chart(document.getElementById('chart-ccaa'), {
     type:'bar',
-    data:{labels:arr.map(x=>x[0]),datasets:[{data:arr.map(x=>x[1]),backgroundColor:'#01534f',borderRadius:8}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{precision:0}},y:{grid:{display:false}}}}
+    data:{
+      labels:arr.map(x=>x[0]),
+      datasets:[{
+        data:arr.map(x=>x[1]),
+        backgroundColor:'#01534f',
+        borderRadius:8
+      }]
+    },
+    options:{
+      indexAxis:'y',
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{beginAtZero:true,ticks:{precision:0}},
+        y:{grid:{display:false}}
+      }
+    }
   });
 }
 
@@ -590,8 +1103,20 @@ function renderGlobalChart(rows) {
 
   charts.global = new Chart(document.getElementById('chart-global'), {
     type:'doughnut',
-    data:{labels:['España','Internacional'],datasets:[{data:[espana,internacional],backgroundColor:['#01534f','#E6EAE3'],borderWidth:0}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom'}}}
+    data:{
+      labels:['España','Internacional'],
+      datasets:[{
+        data:[espana,internacional],
+        backgroundColor:['#01534f','#E6EAE3'],
+        borderWidth:0
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      cutout:'68%',
+      plugins:{legend:{position:'bottom'}}
+    }
   });
 }
 
@@ -609,13 +1134,32 @@ function renderDashboard(rows) {
   showEmptyState(false);
   hideBar('empty-bar');
 
-  const pendientes = spainRows.filter(r => r.estadoNorm === 'pendiente').length;
-  const enviados = spainRows.filter(r => r.estadoNorm === 'enviado').length;
   const respondidos = spainRows.filter(r => isRespondido(r)).length;
   const reuniones = spainRows.filter(r => isReunion(r)).length;
-  const oportunidades = spainRows.filter(r => r.estadoNorm === 'oportunidad').length;
-  const cerrados = spainRows.filter(r => r.estadoNorm === 'cerrado' || r.resultadoNorm === 'cerrado').length;
-  const emailNoValido = spainRows.filter(r => r.resultadoNorm === 'email_no_valido').length;
+  const emailNoValido = spainRows.filter(r => isEmailNoValido(r)).length;
+  const cerrados = spainRows.filter(r => isCerrado(r)).length;
+
+  const pendientes = spainRows.filter(r =>
+    r.estadoNorm === 'pendiente' &&
+    !isRespondido(r) &&
+    !isReunion(r) &&
+    !isEmailNoValido(r) &&
+    !isCerrado(r)
+  ).length;
+
+  const enviados = spainRows.filter(r =>
+    r.estadoNorm === 'enviado' &&
+    !isRespondido(r) &&
+    !isReunion(r) &&
+    !isEmailNoValido(r) &&
+    !isCerrado(r)
+  ).length;
+
+  const oportunidades = spainRows.filter(r =>
+    r.estadoNorm === 'oportunidad' ||
+    r.resultadoNorm === 'solicitud_reunion'
+  ).length;
+
   const activos = spainRows.filter(r => r.activo).length;
 
   const data = {
@@ -643,17 +1187,34 @@ function renderDashboard(rows) {
 async function fetchSheetCSV() {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${GID}&cachebust=${Date.now()}`;
 
-  try {
-    const res = await fetch(url, { cache:'no-store', signal:controller.signal });
-    clearTimeout(timeout);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.text();
-  } catch (e) {
-    clearTimeout(timeout);
-    throw e;
+  const urls = [
+    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${GID}&cachebust=${Date.now()}`,
+    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GID}&cachebust=${Date.now()}`
+  ];
+
+  let lastError = null;
+
+  for (const url of urls) {
+    try {
+      const res = await fetch(url, { cache:'no-store', signal:controller.signal });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const text = await res.text();
+
+      if (text && !text.toLowerCase().includes('<html')) {
+        clearTimeout(timeout);
+        return text;
+      }
+
+      throw new Error('La respuesta no parece CSV. Revisa permisos de Google Sheets.');
+    } catch (e) {
+      lastError = e;
+    }
   }
+
+  clearTimeout(timeout);
+  throw lastError || new Error('No se pudo leer Google Sheets.');
 }
 
 async function loadData() {
@@ -686,22 +1247,55 @@ async function loadData() {
       .filter(row => row.some(cell => String(cell || '').trim()))
       .map(row => {
         const obj = {};
+
         headers.forEach((header, i) => {
           obj[header] = String(row[i] || '').trim();
         });
 
         return {
-          pais: pick(obj, ['spain','pais','país','country']),
-          ciudad: pick(obj, ['ciudad','municipio','city']),
-          poblacion: pick(obj, ['poblacion','población','habitantes','population']),
-          contacto: pick(obj, ['contacto','persona_contacto','responsable','contact']),
-          email: pick(obj, ['email','correo','correo_electronico','mail']),
-          telefono: pick(obj, ['telefono','teléfono','movil','móvil','phone']),
-          estado: pick(obj, ['estado','estado_contacto','status']),
-          fecha: pick(obj, ['fecha','fecha_envio','fecha_de_envio','date']),
-          resultado: pick(obj, ['resultado_de_email','resultado_email','resultado','resultado_del_email']),
-          notas: pick(obj, ['notas','nota','observaciones','comments']),
-          proximo: pick(obj, ['proximo_paso','próximo_paso','proximo paso','próximo paso','siguiente_paso','next_step'])
+          pais: findValue(obj, ['pais','país','country','spain']),
+          ciudad: findValue(obj, ['ciudad','municipio','ayuntamiento','city','localidad']),
+          poblacion: findValue(obj, ['poblacion','población','habitantes','population']),
+          contacto: findValue(obj, ['contacto','persona_contacto','responsable','contact','nombre']),
+          email: findValue(obj, ['email','correo','correo_electronico','mail','e_mail']),
+          telefono: findValue(obj, ['telefono','teléfono','movil','móvil','phone','tel']),
+          estado: findValue(obj, ['estado','estado_contacto','status','fase']),
+          fecha: findValue(obj, ['fecha','fecha_envio','fecha_de_envio','date']),
+          resultado: findValue(obj, [
+            'resultado_de_email',
+            'resultado_email',
+            'resultado_del_email',
+            'resultado',
+            'resultado_correo',
+            'resultado_de_correo',
+            'email_resultado'
+          ]),
+          respuesta: findValue(obj, [
+            'respuesta',
+            'respuesta_email',
+            'respuesta_de_email',
+            'respuesta_del_email',
+            'contestacion',
+            'contestación',
+            'reply'
+          ]),
+          seguimiento: findValue(obj, [
+            'seguimiento',
+            'estado_email',
+            'estado_del_email',
+            'tracking',
+            'follow_up',
+            'followup'
+          ]),
+          notas: findValue(obj, ['notas','nota','observaciones','comments','comentarios']),
+          proximo: findValue(obj, [
+            'proximo_paso',
+            'próximo_paso',
+            'siguiente_paso',
+            'next_step',
+            'accion',
+            'acción'
+          ])
         };
       });
 
@@ -710,6 +1304,7 @@ async function loadData() {
     renderDashboard(getFilteredRows());
 
     hideBar('loading-bar');
+
     document.getElementById('sync-time').textContent =
       'Actualizado: ' + new Date().toLocaleTimeString('es-ES', {
         hour:'2-digit',
@@ -720,7 +1315,7 @@ async function loadData() {
   } catch (error) {
     showEmptyState(true);
     hideBar('loading-bar');
-    showBar('error-bar', `⚠️ No se pudo conectar con Google Sheets: <strong>${escapeHTML(error.message)}</strong>`);
+    showBar('error-bar', `⚠️ No se pudo conectar con Google Sheets: <strong>${escapeHTML(error.message)}</strong><br><br>Revisa que el Google Sheet tenga permiso de lectura para cualquiera con el enlace.`);
     document.getElementById('sync-time').textContent = 'Error de conexión';
   } finally {
     btn.classList.remove('loading');
@@ -746,6 +1341,7 @@ document.getElementById('clear-filters-btn').addEventListener('click', () => {
 });
 
 loadData();
+
 if (autoRefreshHandle) clearInterval(autoRefreshHandle);
 autoRefreshHandle = setInterval(loadData, REFRESH_MS);
 </script>
